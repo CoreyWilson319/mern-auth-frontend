@@ -9,6 +9,7 @@ import "./App.css";
 import Welcome from "./components/Welcome";
 import Navbar from "./components/Navbar";
 import { Component } from 'react';
+require('dotenv').config();
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const user = localStorage.getItem('jwtToken');
@@ -49,7 +50,6 @@ function App() {
       setIsAuthenticated(false)
     }
   }
-
   return (
     <div className="App">
       {/* <NavBar handleLogout={handleLogout} isAuth={isAuthenticated} /> */}
