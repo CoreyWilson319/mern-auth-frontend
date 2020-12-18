@@ -30,18 +30,19 @@ const Signup = () => {
     if (password === confirmPassword) {
       const newUser = { name, email, password };
 
-      axios.post(`${REACT_APP_SERVER_URL}/api/users/register`, newUser)
-      .then(response => {
+      axios
+        .post(`${REACT_APP_SERVER_URL}/api/users/register`, newUser)
+        .then((response) => {
           console.log(resposne);
           setRedirect(true);
-      })
-      .catch(error => {
-          console.log(error)
-      })
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   };
 
-  if (redirect) return <Redirect to='/login' />
+  if (redirect) return <Redirect to="/login" />;
 
   return (
     <div className="row mt-4">
@@ -89,6 +90,9 @@ const Signup = () => {
                 className="form-control"
               />
             </div>
+            <button type="submit" className="btn btn-primary float-right">
+              Submit
+            </button>
           </form>
         </div>
       </div>
