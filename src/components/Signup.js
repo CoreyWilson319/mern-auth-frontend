@@ -31,9 +31,9 @@ const Signup = () => {
       const newUser = { name, email, password };
 
       axios
-        .post(`${REACT_APP_SERVER_URL}/api/users/register`, newUser)
+        .post(`${REACT_APP_SERVER_URL}api/users/register`, newUser)
         .then((response) => {
-          console.log(resposne);
+          console.log(response);
           setRedirect(true);
         })
         .catch((error) => {
@@ -56,7 +56,7 @@ const Signup = () => {
                 type="text"
                 name="name"
                 value={name}
-                onChange={{ handleName }}
+                onChange={handleName}
                 className="form-control"
               />
             </div>
@@ -66,7 +66,7 @@ const Signup = () => {
                 type="email"
                 name="email"
                 value={email}
-                onChange={{ handleEmail }}
+                onChange={handleEmail}
                 className="form-control"
               />
             </div>
@@ -76,7 +76,7 @@ const Signup = () => {
                 type="password"
                 name="password"
                 value={password}
-                onChange={{ handlePassword }}
+                onChange={ handlePassword }
                 className="form-control"
               />
             </div>
@@ -86,7 +86,7 @@ const Signup = () => {
                 type="password"
                 name="confirmPassword"
                 value={confirmPassword}
-                onChange={{ handleConfirmPassword }}
+                onChange={handleConfirmPassword}
                 className="form-control"
               />
             </div>
