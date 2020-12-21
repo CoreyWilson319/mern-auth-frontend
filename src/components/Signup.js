@@ -26,20 +26,24 @@ const Signup = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (password === confirmPassword) {
-      const newUser = { name, email, password };
-
-      axios
-        .post(`${REACT_APP_SERVER_URL}api/users/register`, newUser)
-        .then((response) => {
-          console.log(response);
-          setRedirect(true);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
+    const userData = { email, password };
+    axios
+      .post(`${REACT_APP_SERVER_URL}/api/users/login`, userData)
+      .then((response) => {
+        const { token } = response.data;
+        // Save token to localStorage
+        localStorage.setItem("jwtToken", token);
+        // Set token to auth header
+        setAuthToken(token);
+        // Decode token to get the user data
+        const decoded = jwt_decode(token);
+        // Set current user
+        props.nowCurrentUser(decoded);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Either email or password is incorrect. Please try again.");
+      });
   };
 
   if (redirect) return <Redirect to="/login" />;
@@ -76,7 +80,7 @@ const Signup = () => {
                 type="password"
                 name="password"
                 value={password}
-                onChange={ handlePassword }
+                onChange={handlePassword}
                 className="form-control"
               />
             </div>
